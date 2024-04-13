@@ -1,13 +1,14 @@
 import discord
 from discord.ext import commands
+import os
 import requests
 
-# Replace 'your_bot_token_here' with your actual bot token
-TOKEN = 'MTIyODYzNzE5MDQxODg1ODA3Ng.GEZPnK.3JPlLzAs6ZPoCCIYX6nYLlUpbBeS11M8mejEP4'
+# Set bot token and Brawl Stars API token from environment variables
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+BRAWL_STARS_TOKEN = os.getenv('BRAWL_STARS_TOKEN')
 
-# Define intents with message content enabled
+# Define intents
 intents = discord.Intents.default()
-intents.messages = True  # Enable message content intent
 
 # Set command prefix
 bot = commands.Bot(command_prefix='/', intents=intents)
@@ -17,7 +18,7 @@ API_URL = 'https://api.brawlstars.com/v1/'
 
 # Replace 'your_brawl_stars_token_here' with your Brawl Stars API token
 HEADERS = {
-    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjBjYmI0MjAzLWM5OWEtNDY0NS1iM2NjLTJlYzY4ZmM3MTRhNiIsImlhdCI6MTcxMTY1MzA3MSwic3ViIjoiZGV2ZWxvcGVyL2RhNDlhZTc1LTlmYjEtNGU1Yy1kMTM1LWU2NjI4NmI5ODNiYiIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTQ3LjIzNS4yMTMuMTY4Il0sInR5cGUiOiJjbGllbnQifV19.A_xFgzPA5hymdn2j59ZS1MLj7d7ToMCkuHgIWW_3lbcSKoAxtckv5J-Qz4sXwuPFlIeC0nk4uXOhMOXXZcOo4g',
+    'Authorization': f'Bearer {BRAWL_STARS_TOKEN}',
     'Accept': 'application/json'
 }
 
@@ -96,4 +97,4 @@ async def myhelp(ctx):
     await ctx.send(help_message)
 
 # Run the bot
-bot.run(TOKEN)
+bot.run(BOT_TOKEN)
